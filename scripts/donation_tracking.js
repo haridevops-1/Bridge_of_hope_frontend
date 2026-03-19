@@ -90,25 +90,6 @@ function updateTrackingUI(item) {
   const trustEl = document.getElementById("trackTrust");
   if (trustEl) trustEl.innerHTML = "<span>Assigned Trust</span>" + (item.trust_name || "Looking...");
 
-  // 3. Show driver and vehicle info if available
-  if (item.driver_name || item.vehicle_number) {
-    const trackingGroup = document.getElementById("liveTrackingGroup");
-    if (trackingGroup) {
-      trackingGroup.style.display = "block";
-    }
-
-    const driverEl = document.getElementById("trackDriver");
-    if (driverEl) driverEl.innerText = item.driver_name || "--";
-
-    const phoneEl = document.getElementById("trackPhone");
-    if (phoneEl) phoneEl.innerText = item.driver_phone || "--";
-
-    const vehicleEl = document.getElementById("trackVehicle");
-    if (vehicleEl) vehicleEl.innerText = item.vehicle_number || "--";
-
-    const etaEl = document.getElementById("trackEta");
-    if (etaEl) etaEl.innerText = item.eta || "--";
-  }
 
   // 4. Update the main status heading message
   const statusMsgEl = document.querySelector(".status-message");
@@ -126,26 +107,6 @@ function updateTrackingUI(item) {
     statusMsgEl.className = "status-message " + s;
   }
 
-  // 5. Show the "Proof Image" if the food has been picked up
-  if (item.proof_image) {
-    // Find where to put the image (either info-section or donation-card)
-    let container = document.querySelector(".info-section");
-    if (!container) {
-        container = document.querySelector(".donation-card");
-    }
-
-    // Only add it if it doesn't already exist on the page
-    if (!document.getElementById("proofImageDiv")) {
-      const proofDiv = document.createElement("div");
-      proofDiv.id = "proofImageDiv";
-      proofDiv.style.marginTop = "20px";
-      proofDiv.innerHTML = '<h3 style="margin-bottom:10px;">Pickup Proof:</h3>' +
-                           '<img src="' + item.proof_image + '" style="max-width:100%; border-radius:10px; border: 2px solid #e2e8f0;">';
-      if (container) {
-        container.appendChild(proofDiv);
-      }
-    }
-  }
 }
 
 // This function highlights the "steps" (Pending -> Accepted -> Reached -> Picked -> Completed)

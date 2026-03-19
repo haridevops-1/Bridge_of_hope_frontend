@@ -31,16 +31,16 @@ async function loadDonationHistory() {
   }
 
   if (isRejectedPage === true) {
-    const actionHeader = document.querySelector("th:nth-child(8)");
+    const actionHeader = document.querySelector("th:nth-child(9)");
     if (actionHeader) {
       actionHeader.style.display = "none";
     }
   }
 
   // Show a "Searching" message while we wait for the server
-  let columnCount = 8;
+  let columnCount = 9;
   if (isRejectedPage === true) {
-    columnCount = 7;
+    columnCount = 8;
   }
   tableBody.innerHTML = '<tr><td colspan="' + columnCount + '" style="text-align:center;padding:20px;">Searching for records...</td></tr>';
 
@@ -104,6 +104,7 @@ async function loadDonationHistory() {
             '<td>' + item.approx_quantity + '</td>' +
             '<td>' + item.address + ', ' + item.city + '</td>' +
             '<td><span class="status ' + status + '">' + item.status + '</span></td>' +
+            '<td style="font-size: 0.9em; max-width: 150px; color: #ef4444; font-weight: 500;">' + (item.reject_reason || '<span style="color: #94a3b8;">N/A</span>') + '</td>' +
             '<td>' + formattedDate + '</td>';
             
           // Add the "Track" button only if it's not the rejected page
